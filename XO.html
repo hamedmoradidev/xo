@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 30px;
+        }
+        main{
+            width: 310px;
+            height: 300px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            div{
+                color: white;
+                width: 100px;
+                height: 100px;
+                display: flex;
+                justify-content: center;align-items: center;
+                &:nth-of-type(1){
+                    border-bottom: 5px solid white;
+                    border-right: 5px solid white;
+                }
+                &:nth-of-type(2){
+                    border-bottom: 5px solid white;
+                    border-right: 5px solid white;
+                }
+                &:nth-of-type(3){
+                    border-bottom: 5px solid white;
+                }
+                &:nth-of-type(4){
+                    border-bottom: 5px solid white;
+                    border-right: 5px solid white;
+                }
+                &:nth-of-type(5){
+                    border-bottom: 5px solid white;
+                    border-right: 5px solid white;
+                }
+                &:nth-of-type(6){
+                    border-bottom: 5px solid white;
+                }
+                &:nth-of-type(7){
+                    border-right: 5px solid white;
+                }
+                &:nth-of-type(8){
+                    border-right: 5px solid white;
+                }
+            }
+        }
+        h1{
+            color: green;
+            font-size: 50px;
+        }
+        #info{
+        padding: 5px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-family:Arial, Helvetica, sans-serif;
+        >h1{
+            color: white;
+            font-size: 20px;
+            font-weight: 500;
+        }
+        >a{
+            text-decoration: none;
+            color: white;
+            margin-left: 20px;
+            font-size: 20px;
+        }
+        }
+    </style>
+</head>
+<body>
+    <main id="xo">
+        <div id="1" onclick="myFunction('0')" data-value="0" data-status="off"></div>
+        <div id="2" onclick="myFunction('1')" data-value="1" data-status="off"></div>
+        <div id="3" onclick="myFunction('2')" data-value="2" data-status="off"></div>
+        <div id="4" onclick="myFunction('3')" data-value="3" data-status="off"></div>
+        <div id="5" onclick="myFunction('4')" data-value="4" data-status="off"></div>
+        <div id="6" onclick="myFunction('5')" data-value="5" data-status="off"></div>
+        <div id="7" onclick="myFunction('6')" data-value="6" data-status="off"></div>
+        <div id="8" onclick="myFunction('7')" data-value="7" data-status="off"></div>
+        <div id="9" onclick="myFunction('8')" data-value="8" data-status="off"></div>
+        <h1></h1>
+    </main>
+    <div id="info">
+        <h1>Developed by Hamed Moradi</h1>
+        <a href="https://github.com/hamedmoradidev">GitHub</a>
+        <a href="https://www.linkedin.com/in/hamed-moradi-38420956/">Linkedin</a>
+        <a href="https://instagram.com/hamed.moradi.dev">Instagram</a>
+    </div>
+    <script>
+        let flag=true
+        let counter=0
+        function myFunction(click){
+            let clicked=document.getElementsByTagName("div")[click]
+            let clickStatus=clicked.getAttribute("data-status")
+            counter+=1
+            if(counter==9){
+            document.getElementsByTagName('h1')[0].innerHTML=`Play again!`
+            document.getElementById('xo').setAttribute('inert','inert')
+            }
+            console.log(counter)
+            if(clickStatus=="off"){
+                clicked.setAttribute('data-status','on')
+                if(flag==true){
+                    clicked.innerHTML="X"
+                    clicked.setAttribute('data-value','X')
+                    flag=false
+                }else{
+                    clicked.innerHTML="O"
+                    clicked.setAttribute('data-value','O')
+                    flag=true
+                }
+            }else{
+                clicked.style.color="red"
+                setTimeout(() => {
+                    clicked.style.color="white"
+                }, 500);
+            }
+            check()
+        }
+        function check(){
+            let winner
+            let endGame=false
+            switch(true){
+                case ((document.getElementsByTagName('div')[0].getAttribute('data-value')===document.getElementsByTagName('div')[1].getAttribute('data-value')) && (document.getElementsByTagName('div')[0].getAttribute('data-value')===document.getElementsByTagName('div')[2].getAttribute('data-value'))):
+                    document.getElementsByTagName('div')[0].style.color='green'
+                    document.getElementsByTagName('div')[1].style.color='green'
+                    document.getElementsByTagName('div')[2].style.color='green'
+                    winner=document.getElementsByTagName('div')[0].getAttribute('data-value')
+                    document.getElementById('xo').setAttribute('inert','inert')
+                    endGame=true
+                    break;
+                case ((document.getElementsByTagName('div')[3].getAttribute('data-value')===document.getElementsByTagName('div')[4].getAttribute('data-value')) && (document.getElementsByTagName('div')[3].getAttribute('data-value')===document.getElementsByTagName('div')[5].getAttribute('data-value'))):
+                    document.getElementsByTagName('div')[3].style.color='green'
+                    document.getElementsByTagName('div')[4].style.color='green'
+                    document.getElementsByTagName('div')[5].style.color='green'
+                    winner=document.getElementsByTagName('div')[3].getAttribute('data-value')
+                    document.getElementById('xo').setAttribute('inert','inert')
+                    endGame=true
+                    break;
+                case ((document.getElementsByTagName('div')[6].getAttribute('data-value')===document.getElementsByTagName('div')[7].getAttribute('data-value')) && (document.getElementsByTagName('div')[6].getAttribute('data-value')===document.getElementsByTagName('div')[8].getAttribute('data-value'))):
+                    document.getElementsByTagName('div')[6].style.color='green'
+                    document.getElementsByTagName('div')[7].style.color='green'
+                    document.getElementsByTagName('div')[8].style.color='green'
+                    winner=document.getElementsByTagName('div')[6].getAttribute('data-value')
+                    document.getElementById('xo').setAttribute('inert','inert')
+                    endGame=true
+                    break;
+                case ((document.getElementsByTagName('div')[0].getAttribute('data-value')===document.getElementsByTagName('div')[3].getAttribute('data-value')) && (document.getElementsByTagName('div')[0].getAttribute('data-value')===document.getElementsByTagName('div')[6].getAttribute('data-value'))):
+                    document.getElementsByTagName('div')[0].style.color='green'
+                    document.getElementsByTagName('div')[3].style.color='green'
+                    document.getElementsByTagName('div')[6].style.color='green'
+                    winner=document.getElementsByTagName('div')[0].getAttribute('data-value')
+                    document.getElementById('xo').setAttribute('inert','inert')
+                    endGame=true
+                    break;
+                case ((document.getElementsByTagName('div')[1].getAttribute('data-value')===document.getElementsByTagName('div')[4].getAttribute('data-value')) && (document.getElementsByTagName('div')[1].getAttribute('data-value')===document.getElementsByTagName('div')[7].getAttribute('data-value'))):
+                    document.getElementsByTagName('div')[1].style.color='green'
+                    document.getElementsByTagName('div')[4].style.color='green'
+                    document.getElementsByTagName('div')[7].style.color='green'
+                    winner=document.getElementsByTagName('div')[1].getAttribute('data-value')
+                    document.getElementById('xo').setAttribute('inert','inert')
+                    endGame=true
+                    break;
+                case ((document.getElementsByTagName('div')[2].getAttribute('data-value')===document.getElementsByTagName('div')[5].getAttribute('data-value')) && (document.getElementsByTagName('div')[2].getAttribute('data-value')==document.getElementsByTagName('div')[8].getAttribute('data-value'))):
+                    document.getElementsByTagName('div')[2].style.color='green'
+                    document.getElementsByTagName('div')[5].style.color='green'
+                    document.getElementsByTagName('div')[8].style.color='green'
+                    winner=document.getElementsByTagName('div')[2].getAttribute('data-value')
+                    document.getElementById('xo').setAttribute('inert','inert')
+                    endGame=true
+                    break;
+                case ((document.getElementsByTagName('div')[0].getAttribute('data-value')===document.getElementsByTagName('div')[4].getAttribute('data-value')) && (document.getElementsByTagName('div')[0].getAttribute('data-value')===document.getElementsByTagName('div')[8].getAttribute('data-value'))):
+                    document.getElementsByTagName('div')[0].style.color='green'
+                    document.getElementsByTagName('div')[4].style.color='green'
+                    document.getElementsByTagName('div')[8].style.color='green'
+                    winner=document.getElementsByTagName('div')[0].getAttribute('data-value')
+                    document.getElementById('xo').setAttribute('inert','inert')
+                    endGame=true
+                    break;
+                case ((document.getElementsByTagName('div')[2].getAttribute('data-value')===document.getElementsByTagName('div')[6].getAttribute('data-value')) && (document.getElementsByTagName('div')[2].getAttribute('data-value')===document.getElementsByTagName('div')[6].getAttribute('data-value'))):
+                    document.getElementsByTagName('div')[2].style.color='green'
+                    document.getElementsByTagName('div')[4].style.color='green'
+                    document.getElementsByTagName('div')[6].style.color='green'
+                    winner=document.getElementsByTagName('div')[2].getAttribute('data-value')
+                    document.getElementById('xo').setAttribute('inert','inert')
+                    endGame=true
+                    break;
+                default:
+                endGame='equal';
+            }
+            if (endGame==true){
+                if (winner=='X' || winner=='O'){
+                document.getElementsByTagName('h1')[0].innerHTML=`${winner} wins!`
+                }
+            }
+        }
+    </script>
+</body>
+</html>
